@@ -3,7 +3,24 @@ const jokeBtn = document.querySelector('#jokeBtn');
 
 jokeBtn.addEventListener('click', getJoke);
 
+function setLoadingState() {
+  jokeBtn.disabled = true;
+  jokeText.textContent = 'Loading the joke...';
+}
+function clearLoadingState() {
+  jokeBtn.disabled = false;
+}
+function displayJoke(joke) {
+  jokeText.innerHTML = joke;
+}
+function displayError() {
+  jokeText.textContent = `Oops! Failed to fetch a joke. Please try again later.`;
+  jokeText.classList.add('error');
+}
+
 function getJoke() {
+  setLoadingState();
+
   const url =
     'https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,racist,sexist';
 
@@ -17,12 +34,16 @@ function getJoke() {
     })
     .then((data) => {
       if (data.type === 'single') {
-        jokeText.textContent = data.joke;
+        displayJoke(data.joke);
       } else {
-        jokeText.innerHTML = `${data.setup}<br><br>${data.delivery}`;
+        displayJoke(`${data.setup}<br><br>${data.delivery}`);
       }
     })
     .catch((error) => {
-      console.error('Fetch error', error);
+      console.log(error);
+      displayError();
+    })
+    .finally(() => {
+      clearLoadingState();
     });
 }

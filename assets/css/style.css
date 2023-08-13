@@ -65,3 +65,7 @@ body {
   color: var(--text-color);
   border-color: var(--text-color);
 }
+
+.joke-text.error {
+  color: var(--primary-color);
+}
