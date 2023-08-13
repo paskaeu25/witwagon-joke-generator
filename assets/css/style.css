@@ -32,17 +32,19 @@ body {
 }
 
 .joke-content {
-  /* max-width: 500px; */
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   padding: 1.5rem 3rem;
+  background-color: var(--primary-color-dark);
+  border: 4px solid var(--seconday-color);
+  border-radius: 10px;
 }
 
 .joke-content p {
   margin: 2rem 0;
-  color: var(--text-color);
+  color: var(--white);
   font-size: 1.5rem;
   text-align: center;
 }
